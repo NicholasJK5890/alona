@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You</title>
+    <style>
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background-color: #ffeef2; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+        
+        .hearts { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .heart { position: absolute; color: #ff4757; font-size: 20px; animation: float 5s linear infinite; }
+        @keyframes float { 0% { transform: translateY(100vh); opacity: 1; } 100% { transform: translateY(-10vh); opacity: 0; } }
+
+        .container { position: relative; z-index: 1; background: rgba(255, 255, 255, 0.9); padding: 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); text-align: center; width: 80%; max-width: 400px; }
+        button { padding: 12px 25px; margin: 10px; border: none; border-radius: 20px; background: #ff4757; color: white; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #ff6b81; transform: scale(1.1); }
+        #message { margin-top: 20px; font-size: 1.4rem; font-weight: bold; color: #333; }
+    </style>
+</head>
+<body>
+
+    <div class="hearts" id="hearts"></div>
+
+    <div class="container">
+        <div id="content">
+            <h2 id="question">Let's clear all the differences lately and you're mine?</h2>
+            <button onclick="answer1(true)">Yes</button>
+            <button onclick="answer1(false)">No</button>
+        </div>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        const heartsContainer = document.getElementById('hearts');
+        for(let i=0; i<20; i++) {
+            let heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heartsContainer.appendChild(heart);
+        }
+
+        function answer1(isYes) {
+            const content = document.getElementById('content');
+            const msg = document.getElementById('message');
+            
+            if (isYes) {
+                msg.innerText = "You're daddy's girl";
+                setTimeout(() => {
+                    content.innerHTML = `
+                        <h2>Two cat videos a week? The white one?</h2>
+                        <button onclick="answer2(true)">Yes</button>
+                        <button onclick="answer2(false)">No</button>
+                    `;
+                    msg.innerText = "";
+                }, 2000);
+            } else {
+                msg.innerText = "😔";
+            }
+        }
+
+        function answer2(isYes) {
+            const msg = document.getElementById('message');
+            if (isYes) {
+                msg.innerText = "You're looking good in black today";
+            } else {
+                msg.innerText = "Fine, daddy will work with once a week?";
+            }
+        }
+    </script>
+</body>
+</html>
